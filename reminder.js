@@ -63,6 +63,10 @@ function renderCountdowns() {
     countdownContainer.innerHTML = "";
     let events = JSON.parse(localStorage.getItem("events")) || [];
     events = events.filter(event => event.time > new Date().getTime()); // Remove expired events
+    
+    // Sort events by time (soonest event first)
+    events.sort((a, b) => a.time - b.time);
+    
     localStorage.setItem("events", JSON.stringify(events));
     
     events.forEach(event => {
